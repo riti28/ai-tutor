@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-
+from fastapi.responses import FileResponse
 import google.generativeai as genai
 from gtts import gTTS
 import os
@@ -208,7 +208,5 @@ def ask_question(data: StudentQuestion):
 # =============================
 
 @app.get("/")
-
 def home():
-
-    return {"message": "AI Tutor server running successfully"}
+    return FileResponse("index.html")
