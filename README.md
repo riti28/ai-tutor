@@ -17,13 +17,8 @@ Features:
 - Gemini AI integration
 
 Technology Stack:
-Frontend: HTML, CSS, JavaScript
-Backend: FastAPI (Python)
-AI Model: Google Gemini
-Speech: gTTS
+- Frontend: HTML, CSS, JavaScript
+- Backend: FastAPI (Python)
+- AI Model: Google Gemini
+- Speech: gTTS
 
-Project Structure:
-textbooks/
-grade/
-subject/
-textbook.txt
