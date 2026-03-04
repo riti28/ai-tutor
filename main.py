@@ -207,6 +207,8 @@ def ask_question(data: StudentQuestion):
 # TEST ROUTE
 # =============================
 
+
 @app.get("/")
 def home():
-    return FileResponse("index.html")
+    file_path = os.path.join(os.getcwd(), "index.html")
+    return FileResponse(file_path)
