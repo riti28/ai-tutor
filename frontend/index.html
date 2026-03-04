@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>AI Tutor</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#f4f6f9;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+min-height:100vh;
+margin:0;
+padding:40px 0;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0px 5px 20px rgba(0,0,0,0.1);
+width:500px;
+}
+
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
+label{
+font-weight:bold;
+margin-top:10px;
+display:block;
+}
+
+select, textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+textarea{
+height:100px;
+resize:none;
+}
+
+button{
+margin-top:15px;
+width:100%;
+padding:12px;
+background:#4CAF50;
+border:none;
+color:white;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#45a049;
+}
+
+#answerBox{
+margin-top:20px;
+padding:15px;
+background:#f1f3f5;
+border-radius:6px;
+max-height:300px;
+overflow-y:auto;
+}
+
+#message{
+color:#d97706;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+#audioPlayer{
+margin-top:10px;
+width:100%;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📚 AI Tutor</h1>
+
+<label>Grade</label>
+<select id="grade">
+<option>grade1</option>
+<option>grade2</option>
+<option>grade3</option>
+<option>grade4</option>
+<option>grade5</option>
+<option>grade6</option>
+<option>grade7</option>
+<option>grade8</option>
+<option>grade9</option>
+<option>grade10</option>
+</select>
+
+<label>Subject</label>
+<select id="subject">
+<option>science</option>
+<option>math</option>
+<option>english</option>
+<option>history</option>
+<option>geography</option>
+</select>
+
+<label>Textbook</label>
+<select id="textbook">
+<option>ncert</option>
+<option>stateboard</option>
+<option>icse</option>
+</select>
+
+<label>Language</label>
+<select id="language">
+<option>English</option>
+<option>Hindi</option>
+<option>Kannada</option>
+<option>Tamil</option>
+<option>Telugu</option>
+</select>
+
+<label>Ask your question</label>
+<textarea id="question" placeholder="Type your question here..."></textarea>
+
+<button onclick="askQuestion()">Ask AI Tutor</button>
+
+<div id="answerBox">
+
+<p id="message"></p>
+
+<p id="answerText"></p>
+
+<audio id="audioPlayer" controls></audio>
+
+</div>
+
+</div>
+
+<script>
+
+async function askQuestion(){
+
+const grade=document.getElementById("grade").value
+const subject=document.getElementById("subject").value
+const textbook=document.getElementById("textbook").value
+const language=document.getElementById("language").value
+const question=document.getElementById("question").value
+
+document.getElementById("answerText").innerText="⏳ Answer loading..."
+document.getElementById("message").innerText=""
+document.getElementById("audioPlayer").src=""
+
+const response=await fetch("http://127.0.0.1:8000/ask",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+grade:grade,
+subject:subject,
+textbook:textbook,
+language:language,
+question:question
+})
+
+})
+
+const data=await response.json()
+
+document.getElementById("answerText").innerText=data.text
+document.getElementById("message").innerText=data.message
+document.getElementById("audioPlayer").src=data.audio_file
+
+}
+
+</script>
+
+</body>
+
+</html>
