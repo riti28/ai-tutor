@@ -13,7 +13,7 @@ import time
 # GEMINI API KEY
 # =============================
 
-genai.configure(api_key="AIzaSyC0hrITcIyeA7JOlpVqHsWE9hMTmnd115I")
+genai.configure(api_key="AIzaSyCU72PAFQgb2m3BxUbyw75QMEksNHV1Z3I")
 
 # =============================
 # FASTAPI SETUP
@@ -200,15 +200,15 @@ def ask_question(data: StudentQuestion):
     return {
         "text": answer,
         "message": message,
-        "audio_file": "http://127.0.0.1:8000/static/" + audio_file
+        "audio_file": "/static/" + audio_file
     }
 
 # =============================
 # TEST ROUTE
 # =============================
 
-
 @app.get("/")
+
 def home():
-    file_path = os.path.join(os.getcwd(), "index.html")
+    file_path = os.path.join(os.getcwd(),"frontend","index.html")
     return FileResponse(file_path)

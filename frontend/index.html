@@ -166,7 +166,7 @@ document.getElementById("answerText").innerText="⏳ Answer loading..."
 document.getElementById("message").innerText=""
 document.getElementById("audioPlayer").src=""
 
-const response=await fetch("http://127.0.0.1:8000/ask",{
+const response=await fetch("/ask",{
 
 method:"POST",
 
